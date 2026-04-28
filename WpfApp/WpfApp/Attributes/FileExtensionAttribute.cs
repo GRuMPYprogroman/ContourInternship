@@ -5,13 +5,13 @@ namespace WpfApp.Attributes;
 
 public class FileExtensionAttribute(string extension) : ValidationAttribute
 {
-    public string Extension { get; } = extension.StartsWith(".") ? extension : "." + extension;
+    private string Extension { get; } = extension.StartsWith(".") ? extension : "." + extension;
 
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
-        string path = value?.ToString() ?? string.Empty;
+        var path = value?.ToString() ?? string.Empty;
 
-        if (string.IsNullOrEmpty(path))
+        if (string.IsNullOrWhiteSpace(path))
             return new ValidationResult("Provide path to file");
 
         if (!string.Equals(Path.GetExtension(path), Extension, StringComparison.OrdinalIgnoreCase))

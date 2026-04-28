@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.ComponentModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,5 +20,24 @@ public partial class MainWindow : Window
         InitializeComponent();
 
         DataContext = new MainWindowViewModel();
+        
+        Loaded += Window_Loaded;
+        Closing += Window_Closing;
+    }
+    
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is MainWindowViewModel vm)
+        {
+            vm.Load();
+        }
+    }
+
+    private void Window_Closing(object? sender, CancelEventArgs e)
+    {
+        if (DataContext is MainWindowViewModel vm)
+        {
+            vm.Save();
+        }
     }
 }

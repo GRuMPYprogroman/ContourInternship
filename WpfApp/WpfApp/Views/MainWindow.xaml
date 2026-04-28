@@ -9,10 +9,14 @@
     
     <Window.Resources>
         <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+            
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
                     <Setter Property="ToolTip"
                             Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                    <Setter Property="BorderBrush" Value="Red" />
+                    <Setter Property="BorderThickness" Value="2" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -30,7 +34,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         
                         <TextBlock Grid.Row="0" 
@@ -44,13 +48,15 @@
                                 Margin="0 0 10 5"
                                 Padding="8 2 8 2"
                                 VerticalAlignment="Center"
-                                Command="{Binding OpenFileCommand}"
+                                Command="{Binding OpenFileModule1Command}"
                                 CommandParameter=".dat"/>
                         <TextBox Grid.Row="0" 
                                  Grid.Column="2"
                                  Margin="0 0 50 5"
                                  MinWidth="250" 
-                                 Text="{Binding DatFilePath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"/>
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 Text="{Binding DatFilePathModule1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"/>
                         
                         <TextBlock Grid.Row="1" 
                                    Grid.Column="0" 
@@ -63,23 +69,29 @@
                                 Margin="0 0 10 0"
                                 Padding="8 2 8 2"
                                 VerticalAlignment="Center"
-                                Command="{Binding OpenFileCommand}"
+                                Command="{Binding OpenFileModule1Command}"
                                 CommandParameter=".csv"/>
                         <TextBox Grid.Row="1" 
                                  Grid.Column="2"
                                  Margin="0 0 50 0"
                                  MinWidth="250"
-                                 Text="{Binding CsvFilePath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"/>
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 Text="{Binding CsvFilePathModule1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"/>
                     </Grid>
                     
                     <Button Content="Start Process"
                             HorizontalAlignment="Center"
                             Padding="8 2 8 2"
                             Margin="0 0 0 10"
-                            Command="{Binding StartProcessCommand}"/>
+                            Command="{Binding StartProcessModule1Command}"/>
                     
-                    <ProgressBar DataContext="{Binding gaugePercent}"
-                                 Height="15" />
+                    <ProgressBar Minimum="0"
+                                 Maximum="100"
+                                 Value="{Binding GaugePercent}"
+                                 Height="15" 
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Stretch"/>
                 </StackPanel>
             </TabItem>
             
@@ -93,7 +105,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         
                         <TextBlock Grid.Row="0" 
@@ -107,13 +119,15 @@
                                 Margin="0 0 10 5"
                                 Padding="8 2 8 2"
                                 VerticalAlignment="Center"
-                                Command="{Binding OpenFileCommand}"
+                                Command="{Binding OpenFileModule2Command}"
                                 CommandParameter=".dat"/>
                         <TextBox Grid.Row="0" 
                                  Grid.Column="2"
                                  Margin="0 0 50 5"
                                  MinWidth="250"
-                                 Text="{Binding DatFilePath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"/>
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 Text="{Binding DatFilePathModule2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"/>
                         
                         <TextBlock Grid.Row="1" 
                                    Grid.Column="0" 
@@ -126,23 +140,29 @@
                                 Margin="0 0 10 0"
                                 Padding="8 2 8 2"
                                 VerticalAlignment="Center"
-                                Command="{Binding OpenFileCommand}"
+                                Command="{Binding OpenFileModule2Command}"
                                 CommandParameter=".csv"/>
                         <TextBox Grid.Row="1" 
                                  Grid.Column="2"
                                  Margin="0 0 50 0"
                                  MinWidth="250"
-                                 Text="{Binding CsvFilePath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"/>
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 Text="{Binding CsvFilePathModule2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"/>
                     </Grid>
                     
                     <Button Content="Start Process"
                             HorizontalAlignment="Center"
                             Padding="8 2 8 2"
                             Margin="0 0 0 10"
-                            Command="{Binding StartProcessCommand}"/>
+                            Command="{Binding StartProcessModule2Command}"/>
                     
-                    <ProgressBar DataContext="{Binding gaugePercent}"
-                                 Height="15" />
+                    <ProgressBar Minimum="0"
+                                 Maximum="100"
+                                 Value="{Binding GaugePercent}"
+                                 Height="15"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Stretch"/>
                 </StackPanel>
             </TabItem>
         </TabControl>
